@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <title>Nova Receita - ChefConnect</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="/FRONTEND/style.css">
+</head>
+<body>
+    <!-- Header / Nav (igual ao index.html) -->
+    <header class="site-header">
+        <div class="container">
+            <h1 class="logo"><a href="/index.html">ChefConnect</a></h1>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="/index.html">Início</a></li>
+                    <li><a href="/receitas">Receitas</a></li>
+                    <li><a href="/receitas/novo" aria-current="page">Publicar</a></li>
+                    <li><a href="/sobre">Sobre</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Conteúdo principal (mesmo formulário, agora dentro do layout) -->
+    <main class="container">
+        <h2>Publicar nova receita</h2>
+
+        <form action="/receitas/novo" method="post" enctype="multipart/form-data">
+            <!-- Identificação -->
+            <div class="form-group">
+                <label for="titulo">Título</label><br>
+                <input type="text" id="titulo" name="titulo" required placeholder="Ex: Bolo de cenoura">
+            </div>
+
+            <div class="form-group">
+                <label for="resumo">Resumo (breve descrição)</label><br>
+                <input type="text" id="resumo" name="resumo" placeholder="Uma linha sobre a receita">
+            </div>
+
+            <!-- Categorias e atributos -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="categoria">Categoria</label><br>
+                    <select id="categoria" name="categoria">
+                        <option value="">-- selecione --</option>
+                        <option value="sobremesa">Sobremesa</option>
+                        <option value="prato-principal">Prato principal</option>
+                        <option value="entrada">Entrada</option>
+                        <option value="aperitivo">Aperitivo</option>
+                        <option value="bebida">Bebida</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="dificuldade">Dificuldade</label><br>
+                    <select id="dificuldade" name="dificuldade">
+                        <option value="facil">Fácil</option>
+                        <option value="medio">Médio</option>
+                        <option value="dificil">Difícil</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="tempo">Tempo de preparo (minutos)</label><br>
+                    <input type="number" id="tempo" name="tempo" min="1" placeholder="Ex: 45">
+                </div>
+
+                <div class="form-group">
+                    <label for="porcoes">Porções</label><br>
+                    <input type="number" id="porcoes" name="porcoes" min="1" placeholder="Ex: 4">
+                </div>
+            </div>
+
+            <!-- Ingredientes e preparo -->
+            <div class="form-group">
+                <label for="ingredientes">Ingredientes</label><br>
+                <textarea id="ingredientes" name="ingredientes" rows="8" placeholder="Escreva um ingrediente por linha, ex:
+2 cenouras médias
+3 ovos
+1 xícara de açúcar" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="preparo">Modo de preparo</label><br>
+                <textarea id="preparo" name="preparo" rows="12" placeholder="Descreva o passo a passo da receita" required></textarea>
+            </div>
+
+            <!-- Imagem e tags -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="imagem">Foto da receita (opcional)</label><br>
+                    <input type="file" id="imagem" name="imagem" accept="image/*">
+                </div>
+
+                <div class="form-group">
+                    <label for="tags">Tags (separadas por vírgula)</label><br>
+                    <input type="text" id="tags" name="tags" placeholder="ex: vegan, rápido, café da manhã">
+                </div>
+            </div>
+
+            <!-- Atributos alimentares -->
+            <fieldset class="form-fieldset">
+                <legend>Atributos alimentares</legend>
+                <label><input type="checkbox" name="vegetariano" value="1"> Vegetariano</label><br>
+                <label><input type="checkbox" name="vegano" value="1"> Vegano</label><br>
+                <label><input type="checkbox" name="sem_gluten" value="1"> Sem glúten</label>
+            </fieldset>
+
+            <!-- Submissão -->
+            <div class="form-actions">
+                <button type="submit">Publicar receita</button>
+                <button type="reset">Limpar</button>
+            </div>
+        </form>
+    </main>
+
+    <!-- Footer (igual ao index.html) -->
+    <footer class="site-footer">
+        <div class="container">
+            <p>© 2025 ChefConnect — Todos os direitos reservados.</p>
+        </div>
+    </footer>
+</body>
+</html></div>

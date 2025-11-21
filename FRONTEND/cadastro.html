@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="stylesheet" href="/FRONTEND/style.css">
+    <title>Cadastro - ChefConnect</title>
+</head>
+<body>
+    <main>
+        <h1>Cadastro</h1>
+
+        <form action="/register" method="post" autocomplete="on" novalidate>
+            <fieldset>
+                <legend>Informações pessoais</legend>
+
+                <label for="nome">Nome completo *</label><br />
+                <input id="nome" name="nome" type="text" required autocomplete="name" placeholder="Seu nome completo" /><br /><br />
+
+                <label for="usuario">Nome de usuário *</label><br />
+                <input id="usuario" name="usuario" type="text" required autocomplete="username" placeholder="Nome de usuário" /><br /><br />
+
+                <label for="email">E-mail *</label><br />
+                <input id="email" name="email" type="email" required autocomplete="email" placeholder="seu@exemplo.com" /><br /><br />
+
+                <label for="telefone">Telefone</label><br />
+                <input id="telefone" name="telefone" type="tel" autocomplete="tel" placeholder="+55 (11) 91234-5678" /><br /><br />
+
+                <label for="nascimento">Data de nascimento</label><br />
+                <input id="nascimento" name="nascimento" type="date" autocomplete="bday" /><br /><br />
+
+                <label for="genero">Gênero</label><br />
+                <select id="genero" name="genero" autocomplete="sex">
+                    <option value="">—</option>
+                    <option value="feminino">Feminino</option>
+                    <option value="masculino">Masculino</option>
+                    <option value="outro">Outro</option>
+                    <option value="prefiro_nao_dizer">Prefiro não dizer</option>
+                </select>
+            </fieldset>
+
+            <fieldset>
+                <legend>Dados de acesso</legend>
+
+                <label for="senha">Senha *</label><br />
+                <input id="senha" name="senha" type="password" required minlength="6" autocomplete="new-password" placeholder="Mínimo 6 caracteres" /><br /><br />
+
+                <label for="senha_confirm">Confirmar senha *</label><br />
+                <input id="senha_confirm" name="senha_confirm" type="password" required minlength="6" autocomplete="new-password" placeholder="Repita a senha" />
+            </fieldset>
+
+            <fieldset>
+                <legend>Profissão e localização</legend>
+
+                <label for="especialidade">Especialidade / Tipo de culinária</label><br />
+                <input id="especialidade" name="especialidade" type="text" placeholder="Ex.: Cozinha italiana, confeitaria" /><br /><br />
+
+                <label for="endereco">Endereço</label><br />
+                <textarea id="endereco" name="endereco" rows="3" placeholder="Rua, número, bairro, cidade"></textarea>
+            </fieldset>
+
+            <p>
+                <input id="termos" name="termos" type="checkbox" required />
+                <label for="termos">Aceito os termos e condições *</label>
+            </p>
+
+            <p>
+                <button type="submit">Criar conta</button>
+            </p>
+
+            <p><small>Campos marcados com * são obrigatórios.</small></p>
+        </form>
+    </main>
+</body>
+</html>

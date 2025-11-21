@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="stylesheet" href="/FRONTEND/style.css">
+    <title>Login - ChefConnect</title>
+</head>
+<body>
+    <main role="main" aria-labelledby="loginTitle">
+        <header>
+            <div aria-hidden="true">CC</div>
+            <h1 id="loginTitle">Bem-vindo ao ChefConnect</h1>
+            <p>Faça login para acessar sua conta</p>
+        </header>
+
+        <form id="loginForm" action="/login" method="post" novalidate>
+            <div>
+                <label for="email">E-mail</label>
+                <div>
+                    <input id="email" name="email" type="email" inputmode="email"
+                                 placeholder="seu@exemplo.com" autocomplete="email" required />
+                </div>
+            </div>
+
+            <div>
+                <label for="password">Senha</label>
+                <div>
+                    <input id="password" name="password" type="password"
+                                 placeholder="Senha" autocomplete="current-password" required minlength="6" />
+                </div>
+            </div>
+
+            <div>
+                <label>
+                    <input id="remember" name="remember" type="checkbox" />
+                    Manter-me conectado
+                </label>
+
+                <div>
+                    <a href="/recuperar-senha">Esqueceu a senha?</a>
+                </div>
+            </div>
+
+            <div>
+                <button type="submit">Entrar</button>
+            </div>
+
+            <div>
+                <p>Não tem conta? <a href="/cadastro">Cadastre-se</a></p>
+            </div>
+        </form>
+    </main>
+</body>
+</html>

@@ -1,177 +1,124 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="stylesheet" href="/FRONTEND/style.css">
-    <title>ChefConnect</title>
-    <style>
-        :root{font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;line-height:1.4;color:#222}
-        body{margin:0;padding:0;display:flex;min-height:100vh;flex-direction:column}
-        header, footer{background:#fafafa;border-bottom:1px solid #eee;padding:1rem}
-        .container{width:min(1100px,96%);margin:0 auto}
-        header .top{display:flex;gap:1rem;align-items:center;justify-content:space-between}
-        input[type="search"], input, textarea, button, select{font:inherit;padding:.5rem;border:1px solid #ddd;border-radius:6px}
-        main{flex:1;padding:1rem 0}
-        .grid{display:grid;grid-template-columns:1fr 360px;gap:1rem}
-        .card{background:#fff;border:1px solid #eee;border-radius:8px;padding:1rem}
-        h1,h2,h3{margin:.25rem 0}
-        ul{padding-left:1.2rem}
-        .recipe-photo{width:100%;height:200px;object-fit:cover;border-radius:6px;background:#f0f0f0}
-        footer{border-top:1px solid #eee;padding:1rem 0;text-align:center;font-size:.9rem;color:#666}
-        .meta{font-size:.9rem;color:#666}
-        .btn{background:#0b78d1;color:#fff;border:none;padding:.5rem 1rem;border-radius:6px;cursor:pointer}
-        .muted{color:#666;font-size:.95rem}
-        @media (max-width:900px){.grid{grid-template-columns:1fr}}
-    </style>
+    <title>ChefConnect — Receitas</title>
 </head>
 <body>
-    <header>
-        <div class="container top" role="banner">
-            <div style="display:flex;align-items:center;gap:.75rem">
-                <strong>ChefConnect</strong>
-                <form role="search" onsubmit="event.preventDefault()" aria-label="Pesquisar receitas">
-                    <input type="search" placeholder="Pesquisar por ingrediente ou nome..." aria-label="Pesquisar" style="width:320px">
-                    <button class="btn" style="margin-left:.5rem">Buscar</button>
-                </form>
-            </div>
-            <nav aria-label="Ações do usuário">
-                <a href="#" title="Entrar">Entrar</a>
-            </nav>
+    <header role="banner">
+        <h1>ChefConnect</h1>
+        <p>Receitas fáceis e inspiradoras para o seu dia a dia</p>
+
+        <nav role="navigation" aria-label="Menu principal">
+            <ul>
+                <li><a href="#">Início</a></li>
+                <li><a href="#">Receitas</a></li>
+                <li><a href="#">Categorias</a></li>
+                <li><a href="#">Sobre</a></li>
+                <li><a href="#">Contato</a></li>
+                <li><a href="/post-recipe.html">Postar receita</a></li>
+            </ul>
+        </nav>
+
+        <form action="#" method="get" role="search" aria-label="Pesquisar receitas">
+            <label for="search">Pesquisar receitas:</label>
+            <input id="search" name="q" type="search" placeholder="Ex.: bolo de cenoura">
+            <button type="submit">Buscar</button>
+        </form>
+
+        <div class="auth-actions" role="group" aria-label="Entrar ou cadastrar">
+            <a href="/login" role="button" aria-label="Entrar na sua conta">Entrar</a>
+            <a href="/register" role="button" aria-label="Criar nova conta">Cadastrar</a>
         </div>
     </header>
 
-    <main class="container">
-        <div class="grid">
-            <!-- Conteúdo principal -->
-            <section>
-                <article class="card" aria-labelledby="recentes">
-                    <h2 id="recentes">Receitas Recentes</h2>
+    <main role="main">
+        <section aria-labelledby="destaque">
+            <h2 id="destaque">Receita em destaque</h2>
+            <article aria-labelledby="titulo-destaque">
+                <h3 id="titulo-destaque">Frango assado com ervas</h3>
+                <figure>
+                    <img src="images/frango-assado.jpg" alt="Prato de frango assado com ervas" />
+                    <figcaption>Frango suculento, temperado com ervas frescas.</figcaption>
+                </figure>
+                <p>Tempo: 1h30 • Rendimento: 4 porções</p>
+                <section aria-labelledby="ingredientes-destaque">
+                    <h4 id="ingredientes-destaque">Ingredientes</h4>
                     <ul>
-                        <li>
-                            <strong>Título da Receita</strong>
-                            <div class="muted">por Nome do Autor • Avaliação: ★★★★☆ (4.2)</div>
-                        </li>
-                        <li>
-                            <strong>Panqueca Simples</strong>
-                            <div class="muted">por Joana • ★★★★★</div>
-                        </li>
+                        <li>1 frango inteiro (aprox. 1,5 kg)</li>
+                        <li>3 dentes de alho amassados</li>
+                        <li>2 colheres de sopa de azeite</li>
+                        <li>Ervas frescas (alecrim, tomilho, salsinha)</li>
+                        <li>Sal e pimenta a gosto</li>
+                        <li>1 limão</li>
                     </ul>
-                </article>
-
-                <article class="card" aria-labelledby="detalhe">
-                    <h2 id="detalhe">Detalhe da Receita</h2>
-                    <h3>Título da Receita</h3>
-                    <div class="meta">por <em>Nome do Autor</em></div>
-                    <img src="" alt="Foto principal da receita" class="recipe-photo" aria-hidden="true">
-                    <p class="muted">Avaliação média: ★★★★☆ (4.2)</p>
-
-                    <h4>Ingredientes</h4>
-                    <ul>
-                        <li>1 xícara de farinha</li>
-                        <li>2 ovos</li>
-                        <li>Sal a gosto</li>
-                    </ul>
-
-                    <h4>Modo de preparo</h4>
+                </section>
+                <section aria-labelledby="preparo-destaque">
+                    <h4 id="preparo-destaque">Modo de preparo</h4>
                     <ol>
-                        <li>Misture os ingredientes...</li>
-                        <li>Asse por 30 minutos...</li>
+                        <li>Preaqueça o forno a 200°C.</li>
+                        <li>Tempere o frango com alho, azeite, ervas, sal, pimenta e suco de limão.</li>
+                        <li>Leve ao forno por aproximadamente 1h15, regando ocasionalmente.</li>
+                        <li>Deixe descansar 10 minutos antes de fatiar e servir.</li>
                     </ol>
+                </section>
+                <p><a href="#">Ver receita completa</a></p>
+            </article>
+        </section>
 
-                    <section aria-labelledby="avaliacoes">
-                        <h4 id="avaliacoes">Avaliações</h4>
-                        <p><strong>Joana</strong> • ★★★★★</p>
-                        <p>Deliciosa, fácil de fazer!</p>
+        <section aria-labelledby="recentes">
+            <h2 id="recentes">Receitas recentes</h2>
+            <ul>
+                <li>
+                    <article>
+                        <h3><a href="#">Risoto de cogumelos</a></h3>
+                        <p>Creme, sabor intenso e fácil de preparar.</p>
+                    </article>
+                </li>
+                <li>
+                    <article>
+                        <h3><a href="#">Salada Mediterrânea</a></h3>
+                        <p>Leve, fresca e ótima para dias quentes.</p>
+                    </article>
+                </li>
+                <li>
+                    <article>
+                        <h3><a href="#">Bolo vegano de banana</a></h3>
+                        <p>Doce sem ingredientes de origem animal, macio e perfumado.</p>
+                    </article>
+                </li>
+            </ul>
+        </section>
 
-                        <details>
-                            <summary>Deixar avaliação (somente logados)</summary>
-                            <form onsubmit="event.preventDefault()">
-                                <label>
-                                    Comentário
-                                    <textarea rows="3" style="width:100%"></textarea>
-                                </label>
-                                <div style="margin-top:.5rem">
-                                    <button class="btn">Enviar</button>
-                                </div>
-                            </form>
-                        </details>
-                    </section>
-                </article>
-
-                <article class="card" aria-labelledby="buscar">
-                    <h2 id="buscar">Resultados da Busca</h2>
-                    <p class="muted">Pesquisar por ingrediente ou nome...</p>
-                </article>
-            </section>
-
-            <!-- Barra lateral / formulários -->
-            <aside>
-                <div class="card" aria-labelledby="login">
-                    <h3 id="login">Login / Cadastro</h3>
-                    <details>
-                        <summary>Entrar</summary>
-                        <form onsubmit="event.preventDefault()">
-                            <label>Email<br><input type="email" required></label><br><br>
-                            <label>Senha (min 6 chars)<br><input type="password" minlength="6" required></label><br><br>
-                            <button class="btn">Entrar</button>
-                        </form>
-                    </details>
-
-                    <details>
-                        <summary>Cadastrar</summary>
-                        <form onsubmit="event.preventDefault()">
-                            <label>Nome<br><input type="text" required></label><br><br>
-                            <label>Email<br><input type="email" required></label><br><br>
-                            <label>Senha (min 6 chars)<br><input type="password" minlength="6" required></label><br><br>
-                            <button class="btn">Cadastrar</button>
-                        </form>
-                    </details>
-                </div>
-
-                <div class="card" aria-labelledby="criar">
-                    <h3 id="criar">Criar / Editar Receita</h3>
-                    <form onsubmit="event.preventDefault()">
-                        <label>Título<br><input type="text" required></label><br><br>
-                        <label>Descrição<br><textarea rows="3" required></textarea></label><br><br>
-
-                        <label>Ingredientes (adicione linhas no frontend)</label>
-                        <ul>
-                            <li>• 1 xícara de farinha</li>
-                            <li>• 2 ovos</li>
-                        </ul>
-
-                        <label>Modo de preparo (passos)</label>
-                        <ol>
-                            <li>Misture os ingredientes...</li>
-                        </ol>
-
-                        <label>Preview da imagem<br><input type="file" accept="image/*"></label><br><br>
-
-                        <div style="display:flex;gap:.5rem">
-                            <button class="btn" type="button">Salvar Rascunho</button>
-                            <button class="btn" type="submit">Publicar</button>
-                        </div>
-                    </form>
-                </div>
-
-                <div class="card" aria-labelledby="perfil">
-                    <h3 id="perfil">Perfil do Usuário</h3>
-                    <p><strong>Nome do Usuário</strong></p>
-                    <p class="muted">Bio curta • Localização</p>
-                    <p><a href="#">Minhas Receitas</a> • <a href="#">Favoritas</a></p>
-                </div>
-            </aside>
-        </div>
+        <aside aria-labelledby="categorias">
+            <h2 id="categorias">Categorias populares</h2>
+            <nav aria-label="Lista de categorias">
+                <ul>
+                    <li><a href="#">Pratos principais</a></li>
+                    <li><a href="#">Sobremesas</a></li>
+                    <li><a href="#">Vegetariano</a></li>
+                    <li><a href="#">Vegano</a></li>
+                    <li><a href="#">Sem glúten</a></li>
+                    <li><a href="#">Rápidas (≤ 30 min)</a></li>
+                </ul>
+            </nav>
+        </aside>
     </main>
 
-    <footer>
-        <div class="container">
-            © 2025 ChefConnect • <a href="#">Sobre</a> • <a href="#">Contato</a>
-            <div class="muted" style="margin-top:.5rem;font-size:.85rem">SVG gerado automaticamente — elementos separados para edição no Figma.</div>
-        </div>
+    <footer role="contentinfo">
+        <section>
+            <h2>Sobre o ChefConnect</h2>
+            <p>Compartilhamos receitas testadas e dicas práticas para cozinhar com confiança.</p>
+        </section>
+        <section>
+            <h3>Contato</h3>
+            <address>
+                <p>Email: contato@chefconnect.exemplo</p>
+            </address>
+        </section>
+        <p>&copy; 2025 ChefConnect. Todos os direitos reservados.</p>
     </footer>
-
 </body>
 </html>
