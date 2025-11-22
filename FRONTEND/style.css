@@ -1,151 +1,431 @@
-/* ChefConnect — estilos principais
-   Arquivo gerado automaticamente. Ajuste variáveis conforme necessário.
-   Como usar: importe este CSS no <head> do seu HTML:
-   <link rel="stylesheet" href="/path/to/chefconnect_styles.css">
-*/
 
 :root{
-  --bg: #0f1724; /* dark slate */
-  --surface: #0b1220;
-  --muted: #94a3b8;
-  --text: #e6eef6;
-  --accent: #ff6b35; /* coral */
-  --accent-2: #ffd166; /* warm yellow */
-  --success: #2dd4bf;
-  --glass: rgba(255,255,255,0.04);
-  --card-radius: 14px;
-  --card-padding: 1rem;
-  --shadow-1: 0 6px 18px rgba(2,6,23,0.6);
-  --transition: 200ms cubic-bezier(.2,.9,.3,1);
-  --max-width: 1200px;
+  --primary: #ff7a00;
+  --primary-dark: #e65800;
+  --bg-soft: #fff7f0;
+  --card-border: #f1e6de;
+  --muted: #666;
+  --radius: 10px;
+  --max-width: 1100px;
+  --gap: 1rem;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color-scheme: light;
 }
 
-/* -- Reset / Base -- */
+/* Reset básico */
 *{box-sizing:border-box}
 html,body{height:100%}
 body{
   margin:0;
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
-  background: linear-gradient(180deg,var(--bg) 0%, #071019 100%);
-  color:var(--text);
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  background:#fff;
   -webkit-font-smoothing:antialiased;
   -moz-osx-font-smoothing:grayscale;
-  line-height:1.45;
-  font-size:16px;
+  color:#222;
+  line-height:1.4;
 }
-img{max-width:100%;display:block}
-button{font-family:inherit}
 
-.container{width:calc(100% - 2rem);max-width:var(--max-width);margin:0 auto}
+/* Container */
+.container{width:min(var(--max-width),96%);margin:0 auto;padding:0 12px}
 
-/* -- Utilities (small set) -- */
-.flex{display:flex}
-.grid{display:grid}
-.center{display:flex;align-items:center;justify-content:center}
-.row-gap{row-gap:1rem}
-.col-gap{column-gap:1rem}
-.mt-1{margin-top:0.5rem}.mt-2{margin-top:1rem}.mt-3{margin-top:1.5rem}
-.p-1{padding:0.5rem}.p-2{padding:1rem}.p-3{padding:1.5rem}
-.round{border-radius:999px}
-.hidden{display:none}
-.text-muted{color:var(--muted)}
-.small{font-size:0.9rem}
+/* Base focus for accessibility */
+:focus{outline:3px solid rgba(255,122,0,0.15);outline-offset:2px}
 
-/* -- Header / Nav -- */
-.header{
-  backdrop-filter: blur(6px);
-  background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
-  border-bottom:1px solid rgba(255,255,255,0.03);
-  position:sticky;top:0;z-index:50
+/* Generic components */
+.card{background:#fff;border:1px solid var(--card-border);border-radius:var(--radius);padding:1rem;overflow:hidden;box-shadow:0 1px 0 rgba(0,0,0,0.02)}
+.btn{font:inherit;cursor:pointer;border-radius:8px;padding:.5rem .75rem;border:0;background:var(--primary);color:#fff}
+.btn.secondary{background:transparent;color:var(--primary);border:1px solid rgba(0,0,0,0.06)}
+.muted{color:var(--muted)}
+.hidden{display:none!important}
+.center{text-align:center}
+
+/* Header / Navigation */
+header[role="banner"], header.site-header, header{
+  background:var(--bg-soft);
+  border-bottom:1px solid rgba(0,0,0,0.04);
+  padding:1rem 0;
 }
-.header .inner{display:flex;align-items:center;justify-content:space-between;padding:0.75rem 0}
-.brand{display:flex;align-items:center;gap:0.75rem}
-.brand .logo{width:42px;height:42px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:grid;place-items:center;font-weight:700;color:#071019}
-.brand h1{font-size:1.05rem;margin:0}
-.nav{display:flex;align-items:center;gap:0.75rem}
-.nav a{color:var(--text);text-decoration:none;padding:0.5rem;border-radius:10px}
-.nav a:hover{background:var(--glass)}
+header .container, header .top{display:flex;align-items:center;justify-content:space-between;gap:.75rem}
+header h1{margin:.125rem 0;font-size:1.25rem}
+header p{margin:0;color:var(--muted);font-size:.95rem}
 
-.search-bar{display:flex;align-items:center;background:rgba(255,255,255,0.03);padding:0.45rem;border-radius:10px;min-width:240px}
-.search-bar input{background:transparent;border:0;outline:none;color:var(--text);width:100%;padding:0 0.5rem}
+/* Main nav (simple) */
+nav[role="navigation"] ul, nav.main-nav ul{list-style:none;margin:.5rem 0;padding:0;display:flex;gap:.5rem;flex-wrap:wrap}
+nav[role="navigation"] a, nav.main-nav a{color:var(--primary);text-decoration:none;padding:.25rem .5rem;border-radius:6px}
+nav[role="navigation"] a:hover, nav.main-nav a:hover{background:rgba(255,122,0,0.06);color:var(--primary-dark)}
+.site-header .main-nav a{color:var(--muted)}
+.site-header .main-nav a[aria-current="page"], .site-header .main-nav a:hover{color:var(--primary-dark);background:rgba(255,122,0,0.04)}
 
-.avatar{width:36px;height:36px;border-radius:50%;overflow:hidden;border:2px solid rgba(255,255,255,0.04)}
+/* Search & auth */
+form[role="search"]{display:flex;gap:.4rem;align-items:center;margin:.5rem 0}
+form[role="search"] label{display:none}
+input[type="search"]{font:inherit;padding:.5rem .6rem;border-radius:8px;border:1px solid #e9e9e9;min-width:220px}
+header .auth-actions{display:flex;gap:.5rem;align-items:center;margin-top:.5rem}
+header .auth-actions a{display:inline-block;padding:.45rem .7rem;border-radius:8px;background:transparent;color:var(--primary);border:1px solid transparent}
+header .auth-actions a[role="button"]{border:1px solid rgba(0,0,0,0.04)}
+header .auth-actions a:hover{background:rgba(255,122,0,0.06);color:var(--primary-dark)}
 
-/* -- Hero / Filters -- */
-.hero{padding:2.25rem 0}
-.hero-grid{display:grid;grid-template-columns:1fr 340px;gap:1.5rem}
-.hero-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);padding:1.25rem;border-radius:16px;box-shadow:var(--shadow-1)}
-.filters{display:flex;flex-direction:column;gap:0.75rem}
-.chips{display:flex;flex-wrap:wrap;gap:0.5rem}
-.chip{padding:0.45rem 0.7rem;background:rgba(255,255,255,0.03);border-radius:999px;font-size:0.9rem;cursor:pointer}
-.chip.active{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#071019}
+/* Forms (global) */
+input,textarea,select,button{font:inherit;border-radius:8px;border:1px solid #e9e9e9;padding:.5rem .6rem;background:#fff;box-sizing:border-box}
+textarea{min-height:120px;resize:vertical}
+button[disabled]{opacity:.6;cursor:not-allowed}
+input:invalid, textarea:invalid, select:invalid{box-shadow:0 0 0 3px rgba(255,122,0,0.08);border-color:rgba(230,88,0,0.85)}
 
-/* -- Grid of recipes -- */
-.recipes{padding:1.25rem 0}
-.recipes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
-.card{
-  background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-  border-radius:var(--card-radius);
-  overflow:hidden;
-  box-shadow:var(--shadow-1);
-  transition:transform var(--transition), box-shadow var(--transition);
+/* Main layout */
+main[role="main"], main.container{flex:1;padding:1.25rem 0}
+.main-grid{display:grid;grid-template-columns:1fr 300px;gap:var(--gap);align-items:start}
+@media (max-width:980px){.main-grid{grid-template-columns:1fr}}
+
+/* Featured / Destaque */
+.featured, section[aria-labelledby="destaque"] .card {display:grid;grid-template-columns:1fr 320px;gap:1rem;align-items:start}
+.featured img, section[aria-labelledby="destaque"] img, .feat-photo{width:100%;height:260px;object-fit:cover;border-radius:8px;background:#f7efe6}
+@media (max-width:700px){.featured{grid-template-columns:1fr} .featured img, section[aria-labelledby="destaque"] img{height:180px}}
+
+/* Recipe list (index / recent) */
+section[aria-labelledby="recentes"] ul{list-style:none;padding:0;margin:0;display:grid;gap:.6rem}
+section[aria-labelledby="recentes"] article{display:flex;gap:.75rem;align-items:flex-start;padding:.5rem;border-radius:8px}
+section[aria-labelledby="recentes"] article:hover{background:rgba(255,122,0,0.03)}
+section[aria-labelledby="recentes"] img{width:120px;height:80px;object-fit:cover;border-radius:6px;background:#f6efe7;flex-shrink:0}
+
+/* Receitas page articles */
+body > main { max-width: min(var(--max-width), 980px); margin: 1.25rem auto; padding: 0 1rem 2rem; display: grid; gap: 1rem; }
+body > main > article { display: grid; grid-template-columns: 200px 1fr; gap: 1rem; align-items: start; background: #fff; border: 1px solid var(--card-border); border-radius: 10px; padding: 1rem; box-shadow: 0 6px 18px rgba(0,0,0,0.03); }
+@media (max-width:800px){ body > main > article { grid-template-columns: 1fr; } }
+body > main > article figure img { width:100%; height:140px; object-fit:cover; border-radius:8px; background:#f6efe7; display:block; }
+@media (min-width:801px){ body > main > article figure img { height:160px; } }
+body > main > article section{ margin-top:.6rem; padding-top:.4rem; border-top:1px dashed rgba(0,0,0,0.04); }
+
+/* Recipe compact grid (optional) */
+.recipes-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}
+@media (max-width:700px){ .recipes-grid{grid-template-columns:1fr} }
+
+/* Titles and meta */
+h2,h3,h4{margin:.25rem 0}
+p{margin:.4rem 0}
+.card-title{
+  font-weight:600;font-size:1rem;margin:0 0 .25rem 0;line-height:1.2;
+  overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;
+  line-clamp:2; /* standard property for compatibility */
 }
-.card:hover{transform:translateY(-6px);box-shadow:0 18px 42px rgba(2,6,23,0.7)}
-.card .media{height:190px;object-fit:cover}
-.card .inner{padding:var(--card-padding)}
-.card h3{margin:0 0 0.35rem 0}
-.card .meta{display:flex;align-items:center;justify-content:space-between;font-size:0.9rem;color:var(--muted)}
-.card .tags{display:flex;gap:0.4rem;flex-wrap:wrap;margin-top:0.6rem}
-.tag{background:rgba(255,255,255,0.03);padding:0.25rem 0.5rem;border-radius:999px;font-size:0.8rem}
+.meta{color:var(--muted);font-size:.95rem}
+.recipe-meta{font-size:.9rem;color:var(--muted);margin-top:.35rem}
 
-/* rating stars */
-.stars{display:inline-flex;gap:0.15rem}
-.stars svg{width:16px;height:16px;fill:var(--accent-2)}
+/* Line lists in recipes */
+body > main > article ul, section[aria-labelledby="recentes"] ul { margin: .4rem 0 0 1.1rem; padding:0; list-style-type: disc; color:#333; }
+body > main > article ol { margin: .4rem 0 0 1.1rem; padding:0; color:#333; }
+body > main > article ol li, body > main > article ul li { margin:.35rem 0; line-height:1.45 }
 
-/* -- Recipe detail layout -- */
-.recipe-page{display:grid;grid-template-columns:640px 1fr;gap:1.5rem;padding:1.25rem 0}
-.recipe-card{padding:1rem;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border-radius:12px}
-.ingredients{background:rgba(255,255,255,0.02);padding:1rem;border-radius:10px}
-.step{padding:0.85rem;border-radius:10px;background:rgba(255,255,255,0.01);margin-bottom:0.6rem}
+/* Sidebar / categories */
+aside[aria-labelledby="categorias"]{margin-top:1rem}
+aside ul{list-style:none;padding-left:0;margin:0;display:flex;flex-direction:column;gap:.35rem}
+aside a{color:var(--primary);text-decoration:none;padding:.3rem .45rem;border-radius:6px;display:inline-block}
+aside a:hover{background:rgba(255,122,0,0.06);color:var(--primary-dark)}
+aside .avatar{width:48px;height:48px;border-radius:8px;background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;display:grid;place-items:center;font-weight:700}
 
-/* -- Forms & buttons -- */
-.input,textarea,select{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03);padding:0.7rem;border-radius:10px;color:var(--text);width:100%;outline:none}
-.input:focus,textarea:focus,select:focus{border-color:rgba(255,255,255,0.06);box-shadow:0 6px 18px rgba(0,0,0,0.6)}
-.btn{
-  display:inline-flex;align-items:center;gap:0.6rem;padding:0.6rem 0.9rem;border-radius:10px;border:0;cursor:pointer;transition:transform var(--transition),box-shadow var(--transition)
-}
-.btn-primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#071019}
-.btn-outline{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--text)}
-.btn:active{transform:translateY(1px)}
+/* Footer */
+footer[role="contentinfo"], footer.site-footer{background:var(--bg-soft);border-top:1px solid rgba(0,0,0,0.04);padding:1rem 0;margin-top:1rem}
+footer p, footer address, footer .foot-inner{margin:.25rem 0;color:var(--muted);font-size:.95rem;text-align:center}
 
-/* -- Profile / User card -- */
-.user-card{display:flex;align-items:center;gap:0.85rem;padding:0.6rem;border-radius:12px;background:rgba(255,255,255,0.02)}
-.user-card .meta{display:flex;flex-direction:column}
+/* novaReceita styles (form publication) */
+.site-header{background:var(--bg-soft);border-bottom:1px solid rgba(0,0,0,0.04)}
+.site-header .container{display:flex;align-items:center;justify-content:space-between;gap:.75rem;padding:.6rem 0}
+.site-header .logo a{color:var(--primary);text-decoration:none;font-weight:700;font-size:1.1rem;padding:.25rem .5rem;border-radius:8px}
+main.container h2{margin:0 0 .75rem 0;font-size:1.25rem}
+.container form{max-width:980px;background:transparent;padding:0}
+.form-group{margin-bottom:.9rem}
+.form-group label{display:block;margin-bottom:.35rem;font-weight:600;color:#222}
+.form-row{display:flex;gap:.75rem;align-items:flex-start}
+.form-row .form-group{flex:1;min-width:0}
+.input-file-wrap{display:flex;gap:.5rem;align-items:center}
+.file-preview{display:inline-flex;align-items:center;gap:.5rem;margin-top:.5rem}
+.file-preview img{width:96px;height:72px;object-fit:cover;border-radius:6px;border:1px solid #eee;background:#fff}
+.form-fieldset{border:1px solid var(--card-border);padding:.75rem;border-radius:8px;margin-bottom:.75rem;background:#fff}
+.form-fieldset legend{padding:0 .5rem;font-weight:700;color:var(--muted)}
+.form-fieldset label{display:inline-flex;align-items:center;gap:.5rem;margin-right:1rem;font-weight:500;color:#222}
+.form-actions{display:flex;gap:.5rem;margin-top:1rem}
+.form-actions button:first-child{background:var(--primary)}
+.form-actions button[type="reset"]{background:transparent;color:var(--primary);border:1px solid rgba(0,0,0,0.06)}
+.form-group input:disabled, .form-group textarea:disabled{opacity:.6;cursor:not-allowed}
+label[for]{cursor:pointer}
 
-/* -- Modal -- */
-.modal-backdrop{position:fixed;inset:0;background:rgba(2,6,23,0.6);display:grid;place-items:center;z-index:60}
-.modal{width:min(720px,95%);background:linear-gradient(180deg,#07101a, #07121a);padding:1.25rem;border-radius:12px}
+/* cadastro page styles */
+main > h1{margin:1.25rem auto 0.6rem;font-size:1.5rem;text-align:center;color:#222}
+main > form{max-width:760px;margin:0.6rem auto 2rem;padding:1rem;background:#fff;border-radius:12px;border:1px solid var(--card-border);box-shadow:0 6px 18px rgba(0,0,0,0.03)}
+main fieldset{border:1px solid var(--card-border);padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;background:#fff}
+main fieldset legend{padding:0 .5rem;font-weight:700;color:var(--muted)}
+main label{display:inline-block;margin-bottom:0.35rem;font-weight:600;color:#222}
+main input[type="text"], main input[type="email"], main input[type="tel"], main input[type="password"], main input[type="date"], main select, main textarea{width:100%;padding:0.55rem 0.65rem;border-radius:8px;border:1px solid #e9e9e9;background:#fff;box-sizing:border-box;color:inherit}
+main input[type="checkbox"]{width:auto;height:auto;margin:0 .25rem 0 0;vertical-align:middle}
+main button[type="submit"], main button[type="reset"]{padding:.6rem .9rem;border-radius:8px;font-weight:600}
+main button[type="submit"]{background:var(--primary);color:#fff;border:0}
+main button[type="reset"]{background:transparent;color:var(--primary);border:1px solid rgba(0,0,0,0.06)}
+main small{display:block;margin-top:0.6rem;color:var(--muted)}
 
-/* -- Responsive -- */
-@media (max-width:1100px){
-  .hero-grid{grid-template-columns:1fr}
-  .recipes-grid{grid-template-columns:repeat(2,1fr)}
-  .recipe-page{grid-template-columns:1fr}
+/* login page styles */
+main[role="main"] { display:block; max-width:420px; margin:2.25rem auto; padding:1.25rem; background:#fff; border:1px solid var(--card-border); border-radius:12px; box-shadow:0 8px 24px rgba(0,0,0,0.04) }
+main[role="main"] > header{ text-align:center; margin-bottom:1rem }
+main[role="main"] > header div[aria-hidden="true"]{ width:56px;height:56px;border-radius:10px; display:inline-grid;place-items:center; background:linear-gradient(135deg,var(--primary),var(--primary-dark)); color:#fff;font-weight:700;margin:0 auto .6rem;font-size:1.15rem }
+#loginTitle{margin:0;font-size:1.25rem;color:#111}
+main[role="main"] > header p{margin:.4rem 0 0;color:var(--muted);font-size:.95rem}
+#loginForm{display:flex;flex-direction:column;gap:.85rem}
+#loginForm > div{display:flex;flex-direction:column;gap:.35rem}
+#loginForm label{font-weight:600;font-size:.95rem;color:#222}
+#loginForm input[type="email"], #loginForm input[type="password"]{width:100%;padding:.6rem .7rem;border-radius:8px;border:1px solid #e9e9e9;font:inherit;box-sizing:border-box}
+#loginForm input[type="checkbox"]{margin-right:.45rem;transform:translateY(1px)}
+#loginForm > div > label{display:flex;align-items:center;gap:.35rem;font-weight:500}
+#loginForm button[type="submit"]{margin-top:.25rem;padding:.7rem;border-radius:8px;border:0;background:var(--primary);color:#fff;font-weight:700;cursor:pointer;width:100%}
+#loginForm a{color:var(--primary);text-decoration:none}
+#loginForm a:hover{color:var(--primary-dark);text-decoration:underline}
+#loginForm p{margin:.25rem 0 0;font-size:.95rem;color:var(--muted);text-align:center}
+#loginForm p a{font-weight:600}
+
+/* sobre page styles */
+header > h1{margin:0;font-size:1.5rem;color:#222}
+header nav{margin-top:.5rem}
+header nav ul{list-style:none;padding:0;margin:0;display:flex;gap:.6rem;align-items:center}
+header nav a{color:var(--primary);text-decoration:none;padding:.35rem .6rem;border-radius:8px}
+header nav a:hover{background:rgba(255,122,0,0.06);color:var(--primary-dark)}
+main{max-width:min(var(--max-width),980px);margin:1.25rem auto;padding:0 1rem;line-height:1.6;color:#222}
+main section{background:#fff;border:1px solid var(--card-border);border-radius:10px;padding:1rem;margin-bottom:1rem;box-shadow:0 4px 12px rgba(0,0,0,0.03)}
+main h2{margin-top:0;font-size:1.125rem;color:#111}
+main p{margin:.6rem 0;color:#333}
+@media (max-width:560px){ main{margin:.8rem;padding:0 .6rem} header nav ul{flex-direction:column;align-items:flex-start;gap:.35rem} }
+
+/* Small screens adjustments for forms and rows */
+@media (max-width:900px){
+  .form-row{flex-direction:column}
+  .featured img{height:200px}
+  .file-preview img{width:72px;height:56px}
+  main > form{padding:.75rem;margin:.5rem}
 }
 @media (max-width:700px){
-  .nav{display:none}
-  .recipes-grid{grid-template-columns:1fr}
-  .header .inner{gap:0.5rem}
-  .search-bar{min-width:unset}
+  input[type="search"]{min-width:140px}
+  .featured img, section[aria-labelledby="destaque"] img{height:180px}
+  .featured{grid-template-columns:1fr}
+  .list{grid-template-columns:1fr}
+}
+@media (max-width:560px){
+  header .container, header .top{flex-direction:column;align-items:flex-start;gap:.5rem}
+  form[role="search"] input[type="search"]{width:100%}
+  .grid{gap:.6rem}
+  .site-header .container{flex-direction:column;align-items:flex-start;gap:.5rem}
 }
 
-/* -- Accessibility -- */
-:focus{outline:3px solid rgba(255,107,53,0.14);outline-offset:3px}
-
-/* -- Tiny print-friendly adjustments -- */
-@media print{
-  body{background:#fff;color:#000}
-  .header,.nav,.btn{display:none}
+/* Hover effects on pointer devices */
+@media (hover: hover){
+  body > main > article:hover{ transform: translateY(-3px); transition: transform .18s ease; box-shadow: 0 12px 30px rgba(0,0,0,0.06) }
 }
 
-/* --- End of file --- */
+/* Utilities */
+.small{font-size:.9rem}
+a{color:var(--primary);text-decoration:none}
+a:hover{color:var(--primary-dark);text-decoration:underline}
+
+/* End of consolidated stylesheet */
+
+
+/* === Receitas page refinements (complemento final) ===
+   Apenda este bloco ao final do stylesheet consolidado para ajustar
+   visual e responsividade especificamente em receitas.html
+*/
+
+body > header {
+  padding: 1rem 0;
+  background: var(--bg-soft);
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+}
+
+body > header h1 {
+  font-size: 1.35rem;
+  margin: 0 0 .5rem 0;
+  color: #111;
+}
+
+body > header nav ul {
+  gap: .5rem;
+  flex-wrap: wrap;
+}
+
+body > main {
+  /* já configurado como grid no consolidado; aqui garantimos leitura confortável */
+  line-height: 1.6;
+  color: #222;
+  padding-top: .5rem;
+}
+
+/* Article visual improvements */
+body > main > article {
+  transition: box-shadow .18s ease, transform .18s ease;
+}
+body > main > article .fig-left {
+  display:block;
+}
+
+/* Figcaption centered and subtle */
+body > main > article figcaption {
+  font-size: .9rem;
+  color: var(--muted);
+  margin-top: .5rem;
+  text-align: center;
+}
+
+/* Ensure headings are prominent and accessible */
+body > main > article h3 {
+  font-size: 1.15rem;
+  margin-bottom: .25rem;
+  color: #111;
+}
+
+/* Ingredients and preparo columns on wide screens */
+@media (min-width:1100px) {
+  body > main > article {
+    grid-template-columns: 220px 1fr; /* give more room to image/preview */
+  }
+
+  body > main > article section {
+    display:block;
+  }
+}
+
+/* Improve list readability */
+body > main > article ul,
+body > main > article ol {
+  font-size: .98rem;
+  color: #333;
+}
+
+/* Make images respond nicely */
+body > main > article img {
+  width: 100%;
+  height: auto;
+  display:block;
+  border-radius:8px;
+}
+
+/* Small screens: stack and increase spacing */
+@media (max-width:520px) {
+  body > main {
+    padding-left: .75rem;
+    padding-right: .75rem;
+  }
+  body > main > article {
+    gap: .75rem;
+    padding: .9rem;
+  }
+  body > main > article figure img {
+    height: 160px;
+  }
+}
+
+/* Utility: printable recipe */
+@media print {
+  header, footer, nav, .hidden { display: none !important; }
+  body > main { margin: 0; box-shadow: none; }
+  body > main > article { page-break-inside: avoid; border: none; box-shadow: none; }
+}
+
+/* End of receitas.html refinements */
+
+/* === Receitas page refinements (complemento final) ===
+   Apenda este bloco ao final do stylesheet consolidado para ajustar
+   visual e responsividade especificamente em receitas.html
+*/
+
+body > header {
+  padding: 1rem 0;
+  background: var(--bg-soft);
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+}
+
+body > header h1 {
+  font-size: 1.35rem;
+  margin: 0 0 .5rem 0;
+  color: #111;
+}
+
+body > header nav ul {
+  gap: .5rem;
+  flex-wrap: wrap;
+}
+
+body > main {
+  /* já configurado como grid no consolidado; aqui garantimos leitura confortável */
+  line-height: 1.6;
+  color: #222;
+  padding-top: .5rem;
+}
+
+/* Article visual improvements */
+body > main > article {
+  transition: box-shadow .18s ease, transform .18s ease;
+}
+body > main > article .fig-left {
+  display:block;
+}
+
+/* Figcaption centered and subtle */
+body > main > article figcaption {
+  font-size: .9rem;
+  color: var(--muted);
+  margin-top: .5rem;
+  text-align: center;
+}
+
+/* Ensure headings are prominent and accessible */
+body > main > article h3 {
+  font-size: 1.15rem;
+  margin-bottom: .25rem;
+  color: #111;
+}
+
+/* Ingredients and preparo columns on wide screens */
+@media (min-width:1100px) {
+  body > main > article {
+    grid-template-columns: 220px 1fr; /* give more room to image/preview */
+  }
+
+  body > main > article section {
+    display:block;
+  }
+}
+
+/* Improve list readability */
+body > main > article ul,
+body > main > article ol {
+  font-size: .98rem;
+  color: #333;
+}
+
+/* Make images respond nicely */
+body > main > article img {
+  width: 100%;
+  height: auto;
+  display:block;
+  border-radius:8px;
+}
+
+/* Small screens: stack and increase spacing */
+@media (max-width:520px) {
+  body > main {
+    padding-left: .75rem;
+    padding-right: .75rem;
+  }
+  body > main > article {
+    gap: .75rem;
+    padding: .9rem;
+  }
+  body > main > article figure img {
+    height: 160px;
+  }
+}
+
+/* Utility: printable recipe */
+@media print {
+  header, footer, nav, .hidden { display: none !important; }
+  body > main { margin: 0; box-shadow: none; }
+  body > main > article { page-break-inside: avoid; border: none; box-shadow: none; }
+}
+
+/* End of receitas.html refinements */
